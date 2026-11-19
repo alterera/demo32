@@ -1,0 +1,32 @@
+name: Deploy Demo32 to Alterera Server
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to Server via SSH
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            set -e
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+            cd /var/www/demo32
+            git fetch origin main
+            git reset --hard origin/main
+
+            npm ci
+            npm run build
+
+            pm2 restart demo32 || pm2 start npm --name "demo32" -- run start
+            pm2 save
