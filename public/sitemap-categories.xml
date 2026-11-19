@@ -7,8 +7,20 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>http://localhost:3000/women</loc>
+    <lastmod>2026-11-19T16:48:06.945Z</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://localhost:3000/kids</loc>
+    <lastmod>2026-11-19T16:48:59.045Z</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>http://localhost:3000/men/sneakers</loc>
-    <lastmod>2026-11-19T10:03:14.265Z</lastmod>
+    <lastmod>2026-11-19T17:01:25.308Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>

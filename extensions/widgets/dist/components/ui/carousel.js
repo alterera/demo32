@@ -3,7 +3,7 @@
 import * as React from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import { cn } from '@evershop/evershop/lib/util/cn';
-const CarouselContext = /*#__PURE__*/ React.createContext(null);
+const CarouselContext = React.createContext(null);
 function useCarousel() {
     const context = React.useContext(CarouselContext);
     if (!context) {
@@ -13,58 +13,31 @@ function useCarousel() {
 }
 function Carousel({ opts, setApi, className, children, ...props }) {
     const [carouselRef, api] = useEmblaCarousel(opts);
-    const scrollPrev = React.useCallback(()=>api?.scrollPrev(), [
-        api
-    ]);
-    const scrollNext = React.useCallback(()=>api?.scrollNext(), [
-        api
-    ]);
-    const handleKeyDown = (event)=>{
+    const scrollPrev = React.useCallback(() => api?.scrollPrev(), [api]);
+    const scrollNext = React.useCallback(() => api?.scrollNext(), [api]);
+    const handleKeyDown = (event) => {
         if (event.key === 'ArrowLeft') {
             event.preventDefault();
             scrollPrev();
-        } else if (event.key === 'ArrowRight') {
+        }
+        else if (event.key === 'ArrowRight') {
             event.preventDefault();
             scrollNext();
         }
     };
-    React.useEffect(()=>{
-        if (api && setApi) setApi(api);
-    }, [
-        api,
-        setApi
-    ]);
-    return /*#__PURE__*/ React.createElement(CarouselContext.Provider, {
-        value: {
-            carouselRef,
-            api,
-            scrollPrev,
-            scrollNext
-        }
-    }, /*#__PURE__*/ React.createElement("div", {
-        onKeyDownCapture: handleKeyDown,
-        className: cn('relative', className),
-        role: "region",
-        "aria-roledescription": "carousel",
-        ...props
-    }, children));
+    React.useEffect(() => {
+        if (api && setApi)
+            setApi(api);
+    }, [api, setApi]);
+    return (React.createElement(CarouselContext.Provider, { value: { carouselRef, api, scrollPrev, scrollNext } },
+        React.createElement("div", { onKeyDownCapture: handleKeyDown, className: cn('relative', className), role: "region", "aria-roledescription": "carousel", ...props }, children)));
 }
 function CarouselContent({ className, ...props }) {
     const { carouselRef } = useCarousel();
-    return /*#__PURE__*/ React.createElement("div", {
-        ref: carouselRef,
-        className: "overflow-hidden"
-    }, /*#__PURE__*/ React.createElement("div", {
-        className: cn('flex', className),
-        ...props
-    }));
+    return (React.createElement("div", { ref: carouselRef, className: "overflow-hidden" },
+        React.createElement("div", { className: cn('flex', className), ...props })));
 }
 function CarouselItem({ className, ...props }) {
-    return /*#__PURE__*/ React.createElement("div", {
-        role: "group",
-        "aria-roledescription": "slide",
-        className: cn('min-w-0 shrink-0 grow-0 basis-full', className),
-        ...props
-    });
+    return (React.createElement("div", { role: "group", "aria-roledescription": "slide", className: cn('min-w-0 shrink-0 grow-0 basis-full', className), ...props }));
 }
 export { Carousel, CarouselContent, CarouselItem, useCarousel };

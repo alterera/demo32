@@ -1,0 +1,11 @@
+"""
+Benefits strip widget: a row of icon + title + description items.
+`items` is a JSON array of { id, icon, title, text }.
+"""
+type BenefitsStripWidget {
+  items: JSON
+}
+
+extend type Query {
+  benefitsStripWidget(items: JSON): BenefitsStripWidget
+}

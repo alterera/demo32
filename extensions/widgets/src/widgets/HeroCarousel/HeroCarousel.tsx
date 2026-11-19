@@ -68,7 +68,7 @@ export default function HeroCarousel({ heroCarouselWidget }: Props) {
     <section
       aria-label="Featured"
       // break out of the page-width container so the hero bleeds edge to edge
-      className="relative left-1/2 mb-12 w-screen -translate-x-1/2"
+      className="relative left-1/2 w-screen -translate-x-1/2"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
@@ -79,7 +79,7 @@ export default function HeroCarousel({ heroCarouselWidget }: Props) {
         <CarouselContent>
           {slides.map((slide, i) => (
             <CarouselItem key={slide.id ?? i}>
-              <div className="relative aspect-[4/5] w-full overflow-hidden bg-muted sm:aspect-[16/10] lg:aspect-[16/7]">
+              <div className="relative aspect-[5/6] w-full overflow-hidden bg-muted sm:aspect-[16/9] lg:aspect-[16/6]">
                 <picture>
                   {slide.mobileImage && (
                     <source media="(max-width: 639px)" srcSet={slide.mobileImage} />
@@ -100,7 +100,7 @@ export default function HeroCarousel({ heroCarouselWidget }: Props) {
                       aria-hidden="true"
                       className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent sm:bg-gradient-to-r sm:from-black/50 sm:via-black/10 sm:to-transparent"
                     />
-                    <div className="absolute inset-0 mx-auto flex max-w-7xl flex-col justify-end px-4 pb-20 text-white sm:justify-center sm:pb-0">
+                    <div className="absolute inset-0 mx-auto flex max-w-[1200px] flex-col justify-end px-4 pb-16 lg:px-6 text-white sm:justify-center sm:pb-0">
                       <div className="max-w-xl space-y-3 sm:space-y-4">
                         {slide.eyebrow && (
                           <p className="text-xs font-semibold uppercase tracking-[0.2em] sm:text-sm">

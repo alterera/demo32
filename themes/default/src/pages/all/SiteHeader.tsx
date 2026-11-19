@@ -1,4 +1,5 @@
 import React from 'react';
+import { MotionConfig, motion } from 'motion/react';
 import { MiniCart } from '@evershop/evershop/components/frontStore/cart/MiniCart';
 import { DesktopNav } from '../../components/header/DesktopNav.js';
 import { MobileMenu } from '../../components/header/MobileMenu.js';
@@ -9,6 +10,7 @@ import {
   pickNavCategories,
   type NavCategory
 } from '../../components/header/types.js';
+import { shell } from '../../lib/layout.js';
 
 interface Props {
   navCategories?: { items: NavCategory[] };
@@ -30,31 +32,29 @@ export default function SiteHeader({
   searchUrl,
   cartUrl,
   accountUrl,
-  loginUrl,
+  loginUrl
 }: Props) {
-  const hidden = useHideOnScroll();
+  const { hidden, scrolled } = useHideOnScroll();
   const items = pickNavCategories(navCategories?.items);
   const storeName = headerSetting?.storeName || 'Store';
 
   return (
-    <>
+    <MotionConfig reducedMotion="user">
       {/* hide the empty core header row that remains under our navbar */}
       <style>{`.header__middle{display:none!important}`}</style>
       <div className="h-16" aria-hidden="true" />
-      <div
-        className={`fixed inset-x-0 top-0 z-50 bg-background shadow-[0_1px_6px_rgba(0,0,0,0.08)] transition-transform duration-300 ${
-          hidden ? '-translate-y-full' : 'translate-y-0'
+      <motion.div
+        animate={{ y: hidden ? '-100%' : 0 }}
+        transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+        className={`fixed inset-x-0 top-0 z-50 bg-background transition-shadow duration-300 ${
+          scrolled ? 'shadow-[0_1px_8px_rgba(0,0,0,0.08)]' : 'shadow-none'
         }`}
       >
-        <div className="relative mx-auto flex h-16 max-w-7xl items-stretch justify-between gap-4 px-4">
+        <div className={`${shell} relative flex h-16 items-stretch justify-between gap-4`}>
           {/* left: mobile menu + logo */}
           <div className="flex flex-1 items-center gap-1 lg:flex-none">
             <MobileMenu items={items} storeName={storeName} />
-            <a
-              href="/"
-              aria-label={`${storeName} home`}
-              className="flex items-center"
-            >
+            <a href="/" aria-label={`${storeName} home`} className="flex items-center">
               {headerSetting?.logo ? (
                 <img
                   src={`/images?src=${encodeURIComponent(headerSetting.logo)}&w=320&q=85&f=webp`}
@@ -71,21 +71,16 @@ export default function SiteHeader({
             </a>
           </div>
 
-          {/* middle */}
           <DesktopNav items={items} />
 
-          {/* right */}
           <div className="flex flex-1 items-center justify-end gap-1 lg:flex-none">
             <SearchToggle searchUrl={searchUrl} />
-            <UserMenu
-              accountUrl={accountUrl}
-              loginUrl={loginUrl}
-            />
+            <UserMenu accountUrl={accountUrl} loginUrl={loginUrl} />
             <MiniCart cartUrl={cartUrl} className="flex items-center" />
           </div>
         </div>
-      </div>
-    </>
+      </motion.div>
+    </MotionConfig>
   );
 }
 

@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 /** Hidden while scrolling down past `offset`; shown again after a small scroll up. */
 export function useHideOnScroll(offset = 80, delta = 8) {
   const [hidden, setHidden] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const lastY = useRef(0);
 
   useEffect(() => {
@@ -10,6 +11,7 @@ export function useHideOnScroll(offset = 80, delta = 8) {
     let ticking = false;
     const update = () => {
       const y = window.scrollY;
+      setScrolled(y > 4);
       if (y <= offset) setHidden(false);
       else if (y - lastY.current > delta) setHidden(true);
       else if (lastY.current - y > delta) setHidden(false);
@@ -26,5 +28,5 @@ export function useHideOnScroll(offset = 80, delta = 8) {
     return () => window.removeEventListener('scroll', onScroll);
   }, [offset, delta]);
 
-  return hidden;
+  return { hidden, scrolled };
 }
