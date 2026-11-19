@@ -1,0 +1,10 @@
+{
+  "name": "charanshobha-widgets",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "description": "Custom page-builder widgets for the Charan Shobha storefront",
+  "scripts": {
+    "build": "tsc -p . && node scripts/copy-assets.mjs"
+  }
+}

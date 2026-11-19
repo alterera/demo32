@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+
+# Build output (must be built fresh on the VPS via npm run build)
+.evershop/
+
+# Secrets & local database certificates
+.env
+.env.*
+*.crt
+*.pem
+
+# User-uploaded product/category images (keep persistent on VPS, not in Git)
+media/
+
+# Logs & OS files
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db

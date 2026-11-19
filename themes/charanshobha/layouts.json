@@ -1,0 +1,7 @@
+{
+  "all/Logo": { "areaId": "hiddenHeaderItems" },
+  "all/SearchBox": { "areaId": "hiddenHeaderItems" },
+  "all/MiniCartIcon": { "areaId": "hiddenHeaderItems" },
+  "all/CustomerIcon": { "areaId": "hiddenHeaderItems" },
+  "all/LanguageSwitcher": { "areaId": "hiddenHeaderItems" }
+}
