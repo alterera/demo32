@@ -3,6 +3,7 @@ node_modules/
 
 # Build output (must be built fresh on the VPS via npm run build)
 .evershop/
+.swc-cache/
 
 # Secrets & local database certificates
 .env
