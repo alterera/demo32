@@ -1,0 +1,55 @@
+import * as React from 'react';
+import { cn } from '@evershop/evershop/lib/util/cn';
+
+interface MarqueeProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Seconds for one full loop. Higher is slower. */
+  duration?: number;
+  pauseOnHover?: boolean;
+  reverse?: boolean;
+  /** Gap between items, as a Tailwind gap class. */
+  gap?: string;
+}
+
+/**
+ * Infinite horizontal marquee. The children are rendered twice and the track
+ * moves by exactly half its width, so the loop is seamless. Pure CSS animation
+ * (no JS per frame) and it stops for visitors who prefer reduced motion.
+ */
+export function Marquee({
+  duration = 30,
+  pauseOnHover = true,
+  reverse = false,
+  gap = 'gap-8',
+  className,
+  children,
+  ...props
+}: MarqueeProps) {
+  return (
+    <div
+      className={cn('group flex overflow-hidden', className)}
+      {...props}
+    >
+      <style>{`
+        @keyframes cs-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+        .cs-marquee-track{animation:cs-marquee var(--cs-marquee-duration,30s) linear infinite}
+        .cs-marquee-reverse{animation-direction:reverse}
+        .group:hover .cs-marquee-pause{animation-play-state:paused}
+        @media (prefers-reduced-motion:reduce){.cs-marquee-track{animation:none}}
+      `}</style>
+      <div
+        className={cn(
+          'cs-marquee-track flex w-max shrink-0',
+          gap,
+          reverse && 'cs-marquee-reverse',
+          pauseOnHover && 'cs-marquee-pause'
+        )}
+        style={{ ['--cs-marquee-duration' as string]: `${duration}s` }}
+      >
+        <div className={cn('flex shrink-0 items-center', gap)}>{children}</div>
+        <div className={cn('flex shrink-0 items-center', gap)} aria-hidden="true">
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+}

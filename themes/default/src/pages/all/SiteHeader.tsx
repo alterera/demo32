@@ -10,6 +10,8 @@ import {
   pickNavCategories,
   type NavCategory
 } from '../../components/header/types.js';
+import { Marquee } from '../../components/ui/marquee.js';
+import { TOPBAR_MESSAGES } from '../../content/home.js';
 import { shell } from '../../lib/layout.js';
 
 interface Props {
@@ -41,8 +43,8 @@ export default function SiteHeader({
   return (
     <MotionConfig reducedMotion="user">
       {/* hide the empty core header row that remains under our navbar */}
-      <style>{`.header__middle{display:none!important}`}</style>
-      <div className="h-16" aria-hidden="true" />
+      <style>{`.header__middle{display:none!important}html,body{overflow-x:clip}`}</style>
+      <div className="h-[100px]" aria-hidden="true" />
       <motion.div
         animate={{ y: hidden ? '-100%' : 0 }}
         transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
@@ -50,6 +52,17 @@ export default function SiteHeader({
           scrolled ? 'shadow-[0_1px_8px_rgba(0,0,0,0.08)]' : 'shadow-none'
         }`}
       >
+        {/* announcement bar */}
+        <div className="h-9 bg-[#39ff14] text-black">
+          <Marquee duration={26} gap="gap-10" className="h-full items-center">
+            {TOPBAR_MESSAGES.map((m) => (
+              <span key={m} className="flex items-center gap-10 whitespace-nowrap text-xs font-semibold sm:text-sm">
+                {m}
+                <span aria-hidden="true">✱</span>
+              </span>
+            ))}
+          </Marquee>
+        </div>
         <div className={`${shell} relative flex h-16 items-stretch justify-between gap-4`}>
           {/* left: mobile menu + logo */}
           <div className="flex flex-1 items-center gap-1 lg:flex-none">

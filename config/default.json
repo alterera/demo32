@@ -6,8 +6,8 @@
   "system": {
     "extensions": [
       {
-        "name": "widgets",
-        "resolve": "extensions/widgets",
+        "name": "admin-lite",
+        "resolve": "extensions/admin-lite",
         "enabled": true
       }
     ],

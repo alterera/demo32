@@ -7,15 +7,21 @@ import { SearchToggle } from '../../components/header/SearchToggle.js';
 import { UserMenu } from '../../components/header/UserMenu.js';
 import { useHideOnScroll } from '../../components/header/useHideOnScroll.js';
 import { pickNavCategories } from '../../components/header/types.js';
+import { Marquee } from '../../components/ui/marquee.js';
+import { TOPBAR_MESSAGES } from '../../content/home.js';
 import { shell } from '../../lib/layout.js';
 export default function SiteHeader({ navCategories, headerSetting, searchUrl, cartUrl, accountUrl, loginUrl }) {
     const { hidden, scrolled } = useHideOnScroll();
     const items = pickNavCategories(navCategories === null || navCategories === void 0 ? void 0 : navCategories.items);
     const storeName = (headerSetting === null || headerSetting === void 0 ? void 0 : headerSetting.storeName) || 'Store';
     return (React.createElement(MotionConfig, { reducedMotion: "user" },
-        React.createElement("style", null, `.header__middle{display:none!important}`),
-        React.createElement("div", { className: "h-16", "aria-hidden": "true" }),
+        React.createElement("style", null, `.header__middle{display:none!important}html,body{overflow-x:clip}`),
+        React.createElement("div", { className: "h-[100px]", "aria-hidden": "true" }),
         React.createElement(motion.div, { animate: { y: hidden ? '-100%' : 0 }, transition: { duration: 0.28, ease: [0.22, 1, 0.36, 1] }, className: `fixed inset-x-0 top-0 z-50 bg-background transition-shadow duration-300 ${scrolled ? 'shadow-[0_1px_8px_rgba(0,0,0,0.08)]' : 'shadow-none'}` },
+            React.createElement("div", { className: "h-9 bg-[#39ff14] text-black" },
+                React.createElement(Marquee, { duration: 26, gap: "gap-10", className: "h-full items-center" }, TOPBAR_MESSAGES.map((m) => (React.createElement("span", { key: m, className: "flex items-center gap-10 whitespace-nowrap text-xs font-semibold sm:text-sm" },
+                    m,
+                    React.createElement("span", { "aria-hidden": "true" }, "\u2731")))))),
             React.createElement("div", { className: `${shell} relative flex h-16 items-stretch justify-between gap-4` },
                 React.createElement("div", { className: "flex flex-1 items-center gap-1 lg:flex-none" },
                     React.createElement(MobileMenu, { items: items, storeName: storeName }),

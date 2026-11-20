@@ -1,0 +1,10 @@
+{
+  "name": "admin-lite",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "description": "Hides the Widgets and Page builder areas of the admin. The storefront is a code theme.",
+  "scripts": {
+    "build": "tsc -p ."
+  }
+}
