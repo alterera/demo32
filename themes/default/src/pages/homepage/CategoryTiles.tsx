@@ -4,7 +4,7 @@ import {
   CarouselContent,
   CarouselItem
 } from '../../components/ui/carousel.js';
-import { bleedInset, sectionY, shell } from '../../lib/layout.js';
+import { bleedInset, sectionY } from '../../lib/layout.js';
 
 interface Category {
   name: string;
@@ -22,20 +22,15 @@ export default function CategoryTiles({
 
   return (
     <section
-      aria-labelledby="shop-by-category"
+      aria-label="Shop by category"
       // full-bleed: break out of the content column, then re-align to its edge
       className={`relative left-1/2 w-screen -translate-x-1/2 ${sectionY}`}
     >
-      <div className={shell}>
-        <h2 id="shop-by-category" className="mb-5 text-xl font-bold md:mb-6 md:text-2xl">
-          Shop by category
-        </h2>
-      </div>
       <Carousel
         opts={{ align: 'start', dragFree: true, containScroll: 'trimSnaps' }}
         aria-label="Categories"
       >
-        <CarouselContent style={bleedInset}>
+        <CarouselContent style={{ ...bleedInset, paddingBlock: '0.5rem' }}>
           {items.map((c) => (
             <CarouselItem key={c.url} className="basis-auto pr-5 md:pr-8">
               <a

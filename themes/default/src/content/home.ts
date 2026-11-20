@@ -6,7 +6,8 @@ export const COLLECTIONS = {
   bestSellers: 'best-sellers',
   newArrivals: 'new-arrivals',
   trending: 'trending',
-  promo: 'promo-picks'
+  promo: 'promo-picks',
+  showcase: 'showcase'
 } as const;
 
 export const TOPBAR_MESSAGES = [
@@ -21,15 +22,15 @@ export const HERO_SLIDES = [
     id: 'fw26-a',
     sub: 'FW26',
     title: 'Walk Your Way',
-    image: '/images/hero/hero-1.svg',
-    mobileImage: '/images/hero/hero-1-mobile.svg'
+    image: '/images/hero/q1.webp',
+    mobileImage: '/images/hero/q1.webp'
   },
   {
     id: 'fw26-b',
     sub: 'FW26',
     title: 'Built For Motion',
-    image: '/images/hero/hero-2.svg',
-    mobileImage: '/images/hero/hero-2-mobile.svg'
+    image: '/images/hero/q2.webp',
+    mobileImage: '/images/hero/q2.webp'
   }
 ];
 
@@ -37,9 +38,8 @@ export const HERO_SLIDES = [
 export const HERO_BUTTONS = ['Sneakers', 'Heels'];
 
 export const BEST_SELLERS = {
-  // {name} is replaced with the store name from admin settings
-  paragraph:
-    "Always keeping it simple, so you could make it yours. And that's why every {name} design feels effortless. We build thoughtfully for you to just show up and own it. From movements to unwinds, games to grind. For being always at play.",
+  // each entry is shown on its own line
+  lines: ['Simple by design.', 'Made to be yours.'],
   buttonLabel: 'Explore More',
   buttonHref: '/search?keyword='
 };
@@ -50,23 +50,29 @@ export const OFFER_BANNERS = [
   { id: 'o3', image: '/images/offers/offer-3.svg', href: '/search?keyword=', alt: 'New arrivals are here' }
 ];
 
-export const FEATURE_SPLIT = {
-  title: 'Core Sneaker',
-  buttonLabel: 'Explore Sneakers',
-  buttonHref: '/search?keyword=sneaker',
-  options: [
-    { label: 'Glacier White', image: '/images/feature/feature-1.svg' },
-    { label: 'Classic Black', image: '/images/feature/feature-2.svg' },
-    { label: 'Sand Beige', image: '/images/feature/feature-3.svg' },
-    { label: 'Brick Red', image: '/images/feature/feature-4.svg' }
-  ]
-};
-
-export const BANNER = {
-  image: '/images/banner/banner.svg',
-  href: '/search?keyword=',
-  alt: 'Shop the new collection'
-};
+/**
+ * Two full-bleed columns, each with a background image and overlaid text.
+ * "images" holds 1 or more pictures: with 2+, hovering the column swaps to the
+ * second one; with a single image the column simply stays as it is.
+ */
+export const FEATURE_COLUMNS = [
+  {
+    id: 'sneakers',
+    title: 'Core Sneaker',
+    subtitle: 'Glacier White • Classic Black • Sand Beige',
+    buttonLabel: 'Explore Sneakers',
+    buttonHref: '/search?keyword=sneaker',
+    images: ['/images/feature/f1.webp', '/images/feature/f2.webp']
+  },
+  {
+    id: 'everyday',
+    title: 'Everyday Essentials',
+    subtitle: 'Light, flexible and ready for every day',
+    buttonLabel: 'Shop Now',
+    buttonHref: '/search?keyword=',
+    images: ['/images/feature/f3.webp']
+  }
+];
 
 export const TEXT_MARQUEE = [
   'Secure Payments',
@@ -97,3 +103,17 @@ export const SERVICE_ITEMS = [
     text: 'Your payment information is processed securely'
   }
 ] as const;
+
+/**
+ * Brand / partner logos. Put image files in themes/default/public/images/logos/
+ * and set `image`; without one the name is shown as a text wordmark.
+ */
+export const LOGOS: { name: string; image?: string }[] = [
+  { name: 'Brand One' },
+  { name: 'Brand Two' },
+  { name: 'Brand Three' },
+  { name: 'Brand Four' },
+  { name: 'Brand Five' },
+  { name: 'Brand Six' }
+];
+export const LOGOS_HEADING = 'Brands we work with';

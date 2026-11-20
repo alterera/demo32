@@ -20,15 +20,15 @@ export function ProductCard({ product: p }: { product: Product }) {
     : 0;
 
   return (
-    <a href={p.url} draggable={false} className="group block bg-[#f7f7f5]">
-      <div className="relative aspect-[4/5] overflow-hidden">
+    <a href={p.url} draggable={false} className="group block">
+      <div className="relative aspect-square overflow-hidden bg-[#f9f9f7]">
         {p.image && (
           <img
             src={p.image.url}
             alt={p.image.alt || p.name}
             loading="lazy"
             draggable={false}
-            className="absolute inset-0 h-full w-full object-contain p-5 mix-blend-multiply transition-transform duration-500 ease-out group-hover:scale-105 sm:p-7"
+            className="absolute inset-0 h-full w-full object-contain p-4 mix-blend-multiply transition-transform duration-500 ease-out group-hover:scale-105 sm:p-6"
           />
         )}
         {sale && (
@@ -37,7 +37,7 @@ export function ProductCard({ product: p }: { product: Product }) {
           </Badge>
         )}
       </div>
-      <div className="space-y-1 px-3 pb-4 pt-3 sm:px-4">
+      <div className="space-y-0.5 pb-1 pt-3">
         <h3 className="line-clamp-1 text-sm font-medium sm:text-base">{p.name}</h3>
         <p className="flex items-baseline gap-2 text-sm">
           <span className="font-semibold">

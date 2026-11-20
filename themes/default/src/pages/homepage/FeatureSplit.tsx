@@ -1,70 +1,67 @@
 import React, { useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { Button } from '@evershop/evershop/components/common/ui/Button';
-import { cn } from '@evershop/evershop/lib/util/cn';
-import { FEATURE_SPLIT } from '../../content/home.js';
+import { Bleed } from '../../components/ui/bleed.js';
+import { FEATURE_COLUMNS } from '../../content/home.js';
 import { sectionY } from '../../lib/layout.js';
 
-export default function FeatureSplit() {
-  const [active, setActive] = useState(0);
-  const { title, options, buttonLabel, buttonHref } = FEATURE_SPLIT;
+type Column = (typeof FEATURE_COLUMNS)[number];
+
+function FeatureColumn({ col }: { col: Column }) {
+  const [hover, setHover] = useState(false);
+  // a second image is optional: without one the column keeps its single picture
+  const image = hover && col.images.length > 1 ? col.images[1] : col.images[0];
 
   return (
-    <section aria-label={title} className={sectionY}>
-      {/* image stage: swaps to the option you hover (or tap on phones) */}
-      <div className="relative aspect-square w-full overflow-hidden bg-muted sm:aspect-[4/3] lg:aspect-[16/9]">
-        <AnimatePresence mode="popLayout" initial={false}>
-          <motion.img
-            key={options[active].image}
-            src={options[active].image}
-            alt={`${title} in ${options[active].label}`}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.35 }}
-            className="absolute inset-0 h-full w-full object-cover"
-          />
-        </AnimatePresence>
+    <div
+      className="relative aspect-[4/5] overflow-hidden bg-neutral-200 sm:aspect-square"
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+      onFocus={() => setHover(true)}
+      onBlur={() => setHover(false)}
+    >
+      <AnimatePresence initial={false}>
+        <motion.img
+          key={image}
+          src={image}
+          alt=""
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.45 }}
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+      </AnimatePresence>
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent"
+      />
+      <div className="absolute inset-x-0 bottom-0 p-5 text-white sm:p-8">
+        <h2 className="text-xl font-bold text-white sm:text-2xl">{col.title}</h2>
+        <p className="mt-1 text-sm font-medium text-white/90">{col.subtitle}</p>
+        <Button
+          variant="outline"
+          size="sm"
+          className="mt-4 rounded-none border-white bg-transparent px-5 text-white hover:bg-white hover:text-black"
+          nativeButton={false}
+          render={<a href={col.buttonHref} />}
+        >
+          {col.buttonLabel}
+        </Button>
       </div>
+    </div>
+  );
+}
 
-      <div className="mt-5 grid items-center gap-5 lg:grid-cols-[7fr_3fr] lg:gap-8">
-        <div>
-          <h2 className="text-2xl font-extrabold sm:text-3xl">{title}</h2>
-          <ul className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm font-semibold sm:text-base">
-            {options.map((o, i) => (
-              <li key={o.label} className="flex items-center gap-2">
-                {i > 0 && <span aria-hidden="true" className="text-muted-foreground">•</span>}
-                <button
-                  type="button"
-                  onMouseEnter={() => setActive(i)}
-                  onFocus={() => setActive(i)}
-                  onClick={() => setActive(i)}
-                  aria-pressed={i === active}
-                  className={cn(
-                    'border-b-2 pb-0.5 transition-colors',
-                    i === active
-                      ? 'border-foreground'
-                      : 'border-transparent text-muted-foreground hover:text-foreground'
-                  )}
-                >
-                  {o.label}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="lg:justify-self-end">
-          <Button
-            size="lg"
-            variant="outline"
-            className="w-full rounded-none border-foreground px-8 lg:w-auto"
-            render={<a href={buttonHref} />}
-          >
-            {buttonLabel}
-          </Button>
-        </div>
+export default function FeatureSplit() {
+  return (
+    <Bleed aria-label="Featured collections" className={sectionY}>
+      <div className="grid sm:grid-cols-2">
+        {FEATURE_COLUMNS.map((col) => (
+          <FeatureColumn key={col.id} col={col} />
+        ))}
       </div>
-    </section>
+    </Bleed>
   );
 }
 

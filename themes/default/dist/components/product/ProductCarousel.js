@@ -2,6 +2,7 @@ import * as React from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@evershop/evershop/components/common/ui/Button';
 import { Carousel, CarouselContent, CarouselItem, useCarousel } from '../ui/carousel.js';
+import { bleedInset } from '../../lib/layout.js';
 import { ProductCard } from './ProductCard.js';
 function Arrows() {
     const { scrollPrev, scrollNext } = useCarousel();
@@ -21,7 +22,7 @@ export function ProductCarousel({ products, label }) {
     if (!products.length)
         return null;
     return (React.createElement(Carousel, { opts: { align: 'start', dragFree: true, containScroll: 'trimSnaps' }, "aria-label": label },
-        React.createElement(CarouselContent, { className: "-ml-2 sm:-ml-3" }, products.map((p) => (React.createElement(CarouselItem, { key: p.url, className: "basis-[42%] pl-2 sm:basis-[32%] sm:pl-3 md:basis-[26%] lg:basis-1/4" },
+        React.createElement(CarouselContent, { style: bleedInset }, products.map((p) => (React.createElement(CarouselItem, { key: p.url, className: "basis-[44%] pr-2 sm:basis-[32%] sm:pr-3 md:basis-[26%] lg:basis-1/4 lg:pr-4" },
             React.createElement(ProductCard, { product: p }))))),
         React.createElement(Arrows, null)));
 }

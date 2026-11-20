@@ -7,6 +7,7 @@ import { shell } from '../../lib/layout.js';
 const tap =
   'max-md:inline-flex max-md:min-h-11 max-md:items-center pointer-coarse:inline-flex pointer-coarse:min-h-11 pointer-coarse:items-center';
 const serif = "var(--font-display, ui-serif, Georgia, 'Times New Roman', serif)";
+const NEON = '#39ff14';
 
 export type FooterColumn = {
   title: string;
@@ -15,39 +16,43 @@ export type FooterColumn = {
 
 export interface WordmarkFooterProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Store name: shown top left and set large at the bottom. */
-  name: string
-  legalName?: string;
+  name: string;
   year: number;
   description?: string;
   /** Short line under the description, e.g. payment or delivery info. */
   note?: string;
   navLabel?: string;
   columns: FooterColumn[];
-  email?: string;
+  /** Registered company details for the bottom bar. */
+  legal: { name: string; gstin: string; address: string };
+  credit?: { label: string; href: string };
 }
 
 /**
- * Footer with a short description, link columns that fold into an accordion on
- * phones, and the store name set large and fading into the background.
- * Sharp corners to match the rest of the storefront.
+ * Dark footer in the brand's black and neon green: description, link columns
+ * (an accordion on phones), registered-company details, and the store name set
+ * large at the bottom. Sharp corners, like the rest of the storefront.
  */
 export function WordmarkFooter({
   name,
-  legalName,
   year,
   description,
   note,
   navLabel = 'Footer',
   columns,
-  email,
+  legal,
+  credit,
   className,
   ...props
 }: WordmarkFooterProps) {
   return (
     <div
-      className={cn('relative overflow-hidden border-t bg-background text-foreground', className)}
+      className={cn('relative overflow-hidden bg-[#0e2a20] text-white', className)}
       {...props}
     >
+      {/* neon rule ties the footer to the top bar */}
+      <div aria-hidden="true" className="h-1" style={{ background: NEON }} />
+
       <div className={cn(shell, 'grid gap-10 pt-12 pb-8 max-md:gap-6 max-md:pt-10 max-md:pb-4 md:grid-cols-12 md:pt-16')}>
         <div className="md:col-span-5">
           <span
@@ -57,13 +62,13 @@ export function WordmarkFooter({
             {name}
           </span>
           {description && (
-            <p className="mt-4 max-w-[320px] text-sm leading-[22px] text-muted-foreground">
+            <p className="mt-4 max-w-[320px] text-sm leading-[22px] text-white/60">
               {description}
             </p>
           )}
           {note && (
-            <p className="mt-5 inline-flex items-center gap-2 text-[13px] text-muted-foreground">
-              <span className="size-1.5 bg-foreground" aria-hidden="true" />
+            <p className="mt-5 inline-flex items-center gap-2 text-[13px] text-white/80">
+              <span className="size-1.5" style={{ background: NEON }} aria-hidden="true" />
               {note}
             </p>
           )}
@@ -82,7 +87,7 @@ export function WordmarkFooter({
                   <li key={l.label}>
                     <a
                       href={l.href}
-                      className={cn('text-sm text-muted-foreground transition-colors hover:text-foreground', tap)}
+                      className={cn('text-sm text-white/60 transition-colors hover:text-[#39ff14]', tap)}
                     >
                       {l.label}
                     </a>
@@ -96,11 +101,11 @@ export function WordmarkFooter({
         {/* phones: each column folds away; tap a heading to open it */}
         <nav aria-label={navLabel} className="grid md:hidden">
           {columns.map((col) => (
-            <details key={col.title} className="group border-b first:border-t">
+            <details key={col.title} className="group border-b border-white/10 first:border-t">
               <summary className="flex h-14 cursor-pointer list-none items-center justify-between [&::-webkit-details-marker]:hidden">
                 <span className="text-sm font-semibold">{col.title}</span>
                 <Plus
-                  className="size-4 text-muted-foreground transition-transform duration-300 group-open:rotate-45 motion-reduce:transition-none"
+                  className="size-4 text-white/60 transition-transform duration-300 group-open:rotate-45 motion-reduce:transition-none"
                   strokeWidth={1.75}
                   aria-hidden="true"
                 />
@@ -108,7 +113,7 @@ export function WordmarkFooter({
               <ul className="pb-3">
                 {col.links.map((l) => (
                   <li key={l.label}>
-                    <a href={l.href} className="block py-2.5 text-[15px] text-muted-foreground">
+                    <a href={l.href} className="block py-2.5 text-[15px] text-white/60 hover:text-[#39ff14]">
                       {l.label}
                     </a>
                   </li>
@@ -119,30 +124,47 @@ export function WordmarkFooter({
         </nav>
       </div>
 
-      <div
-        className={cn(
-          shell,
-          'flex flex-col gap-2 pb-6 text-[13px] text-muted-foreground sm:flex-row sm:items-center sm:gap-6'
-        )}
-      >
-        <p className="tabular-nums">
-          © {year} {legalName ?? name}
-        </p>
-        {email && (
-          <a href={`mailto:${email}`} className={cn('hover:text-foreground', tap)}>
-            {email}
-          </a>
-        )}
+      {/* registered company + credit */}
+      <div className="border-t border-white/10">
+        <div
+          className={cn(
+            shell,
+            'flex flex-col gap-4 py-6 text-[13px] text-white/60 md:flex-row md:items-start md:justify-between'
+          )}
+        >
+          <div className="space-y-1">
+            <p className="font-medium text-white/90">
+              © {year} {legal.name}. All rights reserved.
+            </p>
+            <p>GSTIN: <span className="tabular-nums">{legal.gstin}</span></p>
+            <p className="max-w-md leading-relaxed">Registered office: {legal.address}</p>
+          </div>
+          {credit && (
+            <p className="md:text-right">
+              Powered by{' '}
+              <a
+                href={credit.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={cn('font-semibold underline-offset-4 hover:underline', tap)}
+                style={{ color: NEON }}
+              >
+                {credit.label}
+              </a>
+            </p>
+          )}
+        </div>
       </div>
 
       {/* the name, set large and fading into the background */}
       <p
         aria-hidden="true"
-        className="pointer-events-none -mb-[0.18em] select-none whitespace-nowrap text-center leading-[0.9] tracking-[-0.04em] text-transparent [background-clip:text] [-webkit-background-clip:text] [background-image:linear-gradient(to_bottom,color-mix(in_oklab,var(--primary)_28%,transparent),transparent_85%)]"
+        className="pointer-events-none -mb-[0.18em] select-none whitespace-nowrap text-center leading-[0.9] tracking-[-0.04em] text-transparent [background-clip:text] [-webkit-background-clip:text]"
         style={{
           fontFamily: serif,
           fontWeight: 400,
-          fontSize: 'clamp(3.5rem, 14vw, 13rem)'
+          fontSize: 'clamp(3.5rem, 14vw, 13rem)',
+          backgroundImage: `linear-gradient(to bottom, color-mix(in oklab, ${NEON} 38%, transparent), transparent 85%)`
         }}
       >
         {name}

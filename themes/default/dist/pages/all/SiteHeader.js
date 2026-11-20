@@ -10,22 +10,24 @@ import { pickNavCategories } from '../../components/header/types.js';
 import { Marquee } from '../../components/ui/marquee.js';
 import { TOPBAR_MESSAGES } from '../../content/home.js';
 import { shell } from '../../lib/layout.js';
+/** Announcement bar height in px. It shows only at the very top of the page. */
+const TOPBAR_H = 28;
 export default function SiteHeader({ navCategories, headerSetting, searchUrl, cartUrl, accountUrl, loginUrl }) {
     const { hidden, scrolled } = useHideOnScroll();
     const items = pickNavCategories(navCategories === null || navCategories === void 0 ? void 0 : navCategories.items);
     const storeName = (headerSetting === null || headerSetting === void 0 ? void 0 : headerSetting.storeName) || 'Store';
     return (React.createElement(MotionConfig, { reducedMotion: "user" },
         React.createElement("style", null, `.header__middle{display:none!important}html,body{overflow-x:clip}`),
-        React.createElement("div", { className: "h-[100px]", "aria-hidden": "true" }),
-        React.createElement(motion.div, { animate: { y: hidden ? '-100%' : 0 }, transition: { duration: 0.28, ease: [0.22, 1, 0.36, 1] }, className: `fixed inset-x-0 top-0 z-50 bg-background transition-shadow duration-300 ${scrolled ? 'shadow-[0_1px_8px_rgba(0,0,0,0.08)]' : 'shadow-none'}` },
-            React.createElement("div", { className: "h-9 bg-[#39ff14] text-black" },
-                React.createElement(Marquee, { duration: 26, gap: "gap-10", className: "h-full items-center" }, TOPBAR_MESSAGES.map((m) => (React.createElement("span", { key: m, className: "flex items-center gap-10 whitespace-nowrap text-xs font-semibold sm:text-sm" },
+        React.createElement("div", { style: { height: TOPBAR_H + 64 }, "aria-hidden": "true" }),
+        React.createElement(motion.div, { animate: { y: hidden ? '-100%' : scrolled ? -TOPBAR_H : 0 }, transition: { duration: 0.28, ease: [0.22, 1, 0.36, 1] }, className: `fixed inset-x-0 top-0 z-50 bg-background transition-shadow duration-300 ${scrolled ? 'shadow-[0_1px_8px_rgba(0,0,0,0.08)]' : 'shadow-none'}` },
+            React.createElement("div", { style: { height: TOPBAR_H }, className: "bg-[#39ff14] text-black" },
+                React.createElement(Marquee, { duration: 42, gap: "gap-10", className: "h-full items-center" }, TOPBAR_MESSAGES.map((m) => (React.createElement("span", { key: m, className: "flex items-center gap-10 whitespace-nowrap text-[11px] font-semibold sm:text-xs" },
                     m,
                     React.createElement("span", { "aria-hidden": "true" }, "\u2731")))))),
             React.createElement("div", { className: `${shell} relative flex h-16 items-stretch justify-between gap-4` },
                 React.createElement("div", { className: "flex flex-1 items-center gap-1 lg:flex-none" },
                     React.createElement(MobileMenu, { items: items, storeName: storeName }),
-                    React.createElement("a", { href: "/", "aria-label": `${storeName} home`, className: "flex items-center" }, (headerSetting === null || headerSetting === void 0 ? void 0 : headerSetting.logo) ? (React.createElement("img", { src: `/images?src=${encodeURIComponent(headerSetting.logo)}&w=320&q=85&f=webp`, alt: "", width: headerSetting.logoWidth, height: headerSetting.logoHeight, className: "max-h-9 w-auto" })) : (React.createElement("span", { className: "text-lg font-extrabold uppercase tracking-widest" }, storeName)))),
+                    React.createElement("a", { href: "/", "aria-label": `${storeName} home`, className: "flex items-center" }, (headerSetting === null || headerSetting === void 0 ? void 0 : headerSetting.logo) ? (React.createElement("img", { src: `/images?src=${encodeURIComponent(headerSetting.logo)}&w=320&q=85&f=webp`, alt: "", width: headerSetting.logoWidth, height: headerSetting.logoHeight, className: "max-h-9 w-auto" })) : (React.createElement("span", { className: "whitespace-nowrap text-base font-extrabold uppercase tracking-widest sm:text-lg" }, storeName)))),
                 React.createElement(DesktopNav, { items: items }),
                 React.createElement("div", { className: "flex flex-1 items-center justify-end gap-1 lg:flex-none" },
                     React.createElement(SearchToggle, { searchUrl: searchUrl }),

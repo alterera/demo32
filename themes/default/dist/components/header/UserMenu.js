@@ -26,11 +26,11 @@ export function UserMenu({ accountUrl, loginUrl }) {
                     customer.fullName),
                 React.createElement("p", { className: "mb-4 text-xs text-muted-foreground" }, "Manage your account and orders"),
                 React.createElement("div", { className: "flex gap-2" },
-                    React.createElement(Button, { className: "flex-1 rounded-none", render: React.createElement("a", { href: accountUrl }) }, "My account"),
+                    React.createElement(Button, { className: "flex-1 rounded-none", nativeButton: false, render: React.createElement("a", { href: accountUrl }) }, "My account"),
                     React.createElement(Button, { variant: "outline", className: "rounded-none", onClick: () => logout() }, "Logout")))) : (React.createElement(React.Fragment, null,
                 React.createElement("p", { className: "font-semibold" }, "Welcome"),
                 React.createElement("p", { className: "mb-4 text-xs text-muted-foreground" }, "To access account and manage orders"),
-                React.createElement(Button, { variant: "outline", className: "w-full rounded-none border-foreground", render: React.createElement("a", { href: loginUrl }) }, "Login / Signup"))),
+                React.createElement(Button, { variant: "outline", className: "w-full rounded-none border-foreground", nativeButton: false, render: React.createElement("a", { href: loginUrl }) }, "Login / Signup"))),
             React.createElement(Separator, { className: "my-4" }),
             React.createElement("ul", null, helpLinks.map((l) => (React.createElement("li", { key: l.label },
                 React.createElement("a", { href: l.href, className: "block py-1.5 text-sm hover:underline" }, l.label))))))))));

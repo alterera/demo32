@@ -7,6 +7,7 @@ import {
   CarouselItem,
   useCarousel
 } from '../ui/carousel.js';
+import { bleedInset } from '../../lib/layout.js';
 import { ProductCard, type Product } from './ProductCard.js';
 
 function Arrows() {
@@ -45,11 +46,11 @@ export function ProductCarousel({
       opts={{ align: 'start', dragFree: true, containScroll: 'trimSnaps' }}
       aria-label={label}
     >
-      <CarouselContent className="-ml-2 sm:-ml-3">
+      <CarouselContent style={bleedInset}>
         {products.map((p) => (
           <CarouselItem
             key={p.url}
-            className="basis-[42%] pl-2 sm:basis-[32%] sm:pl-3 md:basis-[26%] lg:basis-1/4"
+            className="basis-[44%] pr-2 sm:basis-[32%] sm:pr-3 md:basis-[26%] lg:basis-1/4 lg:pr-4"
           >
             <ProductCard product={p} />
           </CarouselItem>

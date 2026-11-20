@@ -7,6 +7,7 @@ export declare const COLLECTIONS: {
     readonly newArrivals: 'new-arrivals';
     readonly trending: 'trending';
     readonly promo: 'promo-picks';
+    readonly showcase: 'showcase';
 };
 export declare const TOPBAR_MESSAGES: string[];
 export declare const HERO_SLIDES: {
@@ -19,7 +20,7 @@ export declare const HERO_SLIDES: {
 /** Category names the hero buttons look up in admin categories. */
 export declare const HERO_BUTTONS: string[];
 export declare const BEST_SELLERS: {
-    paragraph: string;
+    lines: string[];
     buttonLabel: string;
     buttonHref: string;
 };
@@ -29,20 +30,19 @@ export declare const OFFER_BANNERS: {
     href: string;
     alt: string;
 }[];
-export declare const FEATURE_SPLIT: {
+/**
+ * Two full-bleed columns, each with a background image and overlaid text.
+ * "images" holds 1 or more pictures: with 2+, hovering the column swaps to the
+ * second one; with a single image the column simply stays as it is.
+ */
+export declare const FEATURE_COLUMNS: {
+    id: string;
     title: string;
+    subtitle: string;
     buttonLabel: string;
     buttonHref: string;
-    options: {
-        label: string;
-        image: string;
-    }[];
-};
-export declare const BANNER: {
-    image: string;
-    href: string;
-    alt: string;
-};
+    images: string[];
+}[];
 export declare const TEXT_MARQUEE: string[];
 export declare const SERVICE_ITEMS: readonly [{
     readonly icon: 'support';
@@ -61,3 +61,12 @@ export declare const SERVICE_ITEMS: readonly [{
     readonly title: 'Secure payment';
     readonly text: 'Your payment information is processed securely';
 }];
+/**
+ * Brand / partner logos. Put image files in themes/default/public/images/logos/
+ * and set `image`; without one the name is shown as a text wordmark.
+ */
+export declare const LOGOS: {
+    name: string;
+    image?: string;
+}[];
+export declare const LOGOS_HEADING = "Brands we work with";

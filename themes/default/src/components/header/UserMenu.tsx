@@ -58,7 +58,8 @@ export function UserMenu({ accountUrl, loginUrl }: Props) {
                 <div className="flex gap-2">
                   <Button
                     className="flex-1 rounded-none"
-                    render={<a href={accountUrl} />}
+                    nativeButton={false}
+            render={<a href={accountUrl} />}
                   >
                     My account
                   </Button>
@@ -80,7 +81,8 @@ export function UserMenu({ accountUrl, loginUrl }: Props) {
                 <Button
                   variant="outline"
                   className="w-full rounded-none border-foreground"
-                  render={<a href={loginUrl} />}
+                  nativeButton={false}
+            render={<a href={loginUrl} />}
                 >
                   Login / Signup
                 </Button>

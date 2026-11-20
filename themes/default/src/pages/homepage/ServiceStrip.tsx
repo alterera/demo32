@@ -1,7 +1,6 @@
 import React from 'react';
 import { Headset, RotateCcw, ShieldCheck, Truck, type LucideIcon } from 'lucide-react';
 import { SERVICE_ITEMS } from '../../content/home.js';
-import { sectionY } from '../../lib/layout.js';
 
 const ICONS: Record<string, LucideIcon> = {
   support: Headset,
@@ -12,8 +11,8 @@ const ICONS: Record<string, LucideIcon> = {
 
 export default function ServiceStrip() {
   return (
-    <section aria-label="Our services" className={sectionY}>
-      <ul className="grid grid-cols-2 gap-x-4 gap-y-8 border-y py-8 md:grid-cols-4 md:gap-x-8 md:py-12">
+    <section aria-label="Our services" className="pt-8 md:pt-12">
+      <ul className="grid grid-cols-2 gap-x-4 gap-y-8 border-t py-8 md:grid-cols-4 md:gap-x-8 md:py-10">
         {SERVICE_ITEMS.map((item) => {
           const Icon = ICONS[item.icon];
           return (

@@ -1,5 +1,6 @@
 import React from 'react';
 import { WordmarkFooter } from '../../components/ui/wordmark-footer.js';
+import { COMPANY, CREDIT } from '../../content/company.js';
 import { pickNavCategories } from '../../components/header/types.js';
 export default function SiteFooter({ footerCategories, footerSetting }) {
     const name = (footerSetting === null || footerSetting === void 0 ? void 0 : footerSetting.storeName) || 'Store';
@@ -12,7 +13,7 @@ export default function SiteFooter({ footerCategories, footerSetting }) {
         .footer{margin-top:0!important;padding:0!important;border:0!important;background:transparent!important}
         .footer__middle,.footer__bottom{display:none!important}
       `),
-        React.createElement(WordmarkFooter, { className: "mt-8 md:mt-12", name: name, year: new Date().getFullYear(), description: "Everyday footwear for men, women and kids, made to be worn all day and built to last.", note: "Cash on delivery available", columns: [
+        React.createElement(WordmarkFooter, { legal: { name: COMPANY.legalName, gstin: COMPANY.gstin, address: COMPANY.address }, credit: CREDIT, name: name, year: new Date().getFullYear(), description: "Everyday footwear for men, women and kids, made to be worn all day and built to last.", note: "Cash on delivery available", columns: [
                 { title: 'Shop', links: shop },
                 {
                     title: 'Help',

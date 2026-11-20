@@ -77,19 +77,19 @@ export default function Hero({ heroCategories }: Props) {
                 </picture>
                 <div
                   aria-hidden="true"
-                  className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent sm:bg-gradient-to-r sm:from-black/50 sm:via-black/10 sm:to-transparent"
+                  className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/20 to-transparent sm:bg-gradient-to-r sm:from-black/55 sm:via-black/15 sm:to-transparent"
                 />
-                <div className={cn(shell, 'absolute inset-0 left-1/2 flex -translate-x-1/2 flex-col justify-end pb-20 text-white sm:justify-center sm:pb-0')}>
-                  <p className="text-lg font-light tracking-wide sm:text-2xl">{slide.sub}</p>
-                  <h2 className="mt-1 max-w-xl text-4xl font-extrabold leading-[1.05] sm:text-5xl lg:text-7xl">
+                <div className={cn(shell, 'absolute inset-0 left-1/2 flex -translate-x-1/2 flex-col items-center justify-end pb-16 text-center text-white sm:items-start sm:justify-center sm:pb-0 sm:text-left')}>
+                  <p className="text-sm font-light tracking-wide text-white sm:text-xl lg:text-2xl">{slide.sub}</p>
+                  <h2 className="mt-1 max-w-xl text-2xl font-extrabold leading-[1.05] text-white sm:text-5xl lg:text-7xl">
                     {slide.title}
                   </h2>
-                  <div className="mt-6 flex gap-6 sm:mt-8">
+                  <div className="mt-4 flex justify-center gap-5 sm:mt-8 sm:justify-start sm:gap-6">
                     {links.map((l) => (
                       <a
                         key={l.label}
                         href={l.href}
-                        className="border-b-2 border-white pb-1 text-sm font-semibold tracking-wide transition-opacity hover:opacity-70 sm:text-base"
+                        className="border-b-2 border-white pb-0.5 text-xs font-semibold tracking-wide text-white transition-opacity hover:opacity-70 sm:pb-1 sm:text-base"
                       >
                         {l.label}
                       </a>

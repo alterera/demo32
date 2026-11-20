@@ -1,5 +1,6 @@
 import React from 'react';
 import { WordmarkFooter } from '../../components/ui/wordmark-footer.js';
+import { COMPANY, CREDIT } from '../../content/company.js';
 import {
   pickNavCategories,
   type NavCategory
@@ -25,7 +26,8 @@ export default function SiteFooter({ footerCategories, footerSetting }: Props) {
         .footer__middle,.footer__bottom{display:none!important}
       `}</style>
       <WordmarkFooter
-        className="mt-8 md:mt-12"
+        legal={{ name: COMPANY.legalName, gstin: COMPANY.gstin, address: COMPANY.address }}
+        credit={CREDIT}
         name={name}
         year={new Date().getFullYear()}
         description="Everyday footwear for men, women and kids, made to be worn all day and built to last."

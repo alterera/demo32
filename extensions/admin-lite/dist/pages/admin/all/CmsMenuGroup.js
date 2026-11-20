@@ -1,12 +1,23 @@
 import React from 'react';
 import { Book, Inbox } from 'lucide-react';
 import { NavigationItemGroup } from '@evershop/evershop/components/admin/NavigationItemGroup';
-/** Replaces the core CMS menu group: Pages and Contact messages only (no Widgets). */
-export default function CmsMenuGroup({ cmsPageGrid, contactSubmissionGrid }) {
-    return (React.createElement(NavigationItemGroup, { id: "cmsMenuGroup", name: "CMS", items: [
-            { Icon: Book, url: cmsPageGrid, title: 'Pages' },
-            { Icon: Inbox, url: contactSubmissionGrid, title: 'Contact messages' }
-        ] }));
+/** Replaces the core CMS menu group: Pages and Contact messages only (no Widgets). */ export default function CmsMenuGroup({ cmsPageGrid, contactSubmissionGrid }) {
+    return /*#__PURE__*/ React.createElement(NavigationItemGroup, {
+        id: "cmsMenuGroup",
+        name: "CMS",
+        items: [
+            {
+                Icon: Book,
+                url: cmsPageGrid,
+                title: 'Pages'
+            },
+            {
+                Icon: Inbox,
+                url: contactSubmissionGrid,
+                title: 'Contact messages'
+            }
+        ]
+    });
 }
 export const layout = {
     areaId: 'adminMenu',

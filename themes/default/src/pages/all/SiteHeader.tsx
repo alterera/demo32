@@ -28,6 +28,9 @@ interface Props {
   loginUrl: string;
 }
 
+/** Announcement bar height in px. It shows only at the very top of the page. */
+const TOPBAR_H = 28;
+
 export default function SiteHeader({
   navCategories,
   headerSetting,
@@ -44,19 +47,19 @@ export default function SiteHeader({
     <MotionConfig reducedMotion="user">
       {/* hide the empty core header row that remains under our navbar */}
       <style>{`.header__middle{display:none!important}html,body{overflow-x:clip}`}</style>
-      <div className="h-[100px]" aria-hidden="true" />
+      <div style={{ height: TOPBAR_H + 64 }} aria-hidden="true" />
       <motion.div
-        animate={{ y: hidden ? '-100%' : 0 }}
+        animate={{ y: hidden ? '-100%' : scrolled ? -TOPBAR_H : 0 }}
         transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
         className={`fixed inset-x-0 top-0 z-50 bg-background transition-shadow duration-300 ${
           scrolled ? 'shadow-[0_1px_8px_rgba(0,0,0,0.08)]' : 'shadow-none'
         }`}
       >
         {/* announcement bar */}
-        <div className="h-9 bg-[#39ff14] text-black">
-          <Marquee duration={26} gap="gap-10" className="h-full items-center">
+        <div style={{ height: TOPBAR_H }} className="bg-[#39ff14] text-black">
+          <Marquee duration={42} gap="gap-10" className="h-full items-center">
             {TOPBAR_MESSAGES.map((m) => (
-              <span key={m} className="flex items-center gap-10 whitespace-nowrap text-xs font-semibold sm:text-sm">
+              <span key={m} className="flex items-center gap-10 whitespace-nowrap text-[11px] font-semibold sm:text-xs">
                 {m}
                 <span aria-hidden="true">✱</span>
               </span>
@@ -77,7 +80,7 @@ export default function SiteHeader({
                   className="max-h-9 w-auto"
                 />
               ) : (
-                <span className="text-lg font-extrabold uppercase tracking-widest">
+                <span className="whitespace-nowrap text-base font-extrabold uppercase tracking-widest sm:text-lg">
                   {storeName}
                 </span>
               )}

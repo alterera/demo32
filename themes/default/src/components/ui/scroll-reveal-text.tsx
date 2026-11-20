@@ -8,6 +8,9 @@ import {
 } from 'motion/react';
 import { cn } from '@evershop/evershop/lib/util/cn';
 
+const FROM = '#c8c8c4'; // unlit
+const TO = '#39ff14'; // brand neon
+
 function Word({
   word,
   index,
@@ -19,49 +22,67 @@ function Word({
   total: number;
   progress: MotionValue<number>;
 }) {
-  const start = index / total;
-  const end = (index + 1) / total;
-  const opacity = useTransform(progress, [start, end], [0.18, 1]);
+  const color = useTransform(progress, [index / total, (index + 1) / total], [FROM, TO]);
   return (
-    <motion.span style={{ opacity }} className="inline-block">
+    <motion.span
+      style={{ color, textShadow: '0 1px 1px rgba(0,0,0,0.22)' }}
+      className="inline-block"
+    >
       {word}&nbsp;
     </motion.span>
   );
 }
 
 /**
- * Paragraph whose words light up one by one as it scrolls through the viewport.
- * With reduced motion the full text is shown straight away.
+ * Text whose words turn the brand neon, one by one, as it scrolls through the
+ * viewport. Each entry in `lines` is its own line. With reduced motion the full
+ * text is shown lit straight away.
  */
 export function ScrollRevealText({
-  text,
+  lines,
   className
 }: {
-  text: string;
+  lines: string[];
   className?: string;
 }) {
   const ref = React.useRef<HTMLParagraphElement>(null);
   const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ['start 0.85', 'end 0.45']
+    offset: ['start 0.9', 'end 0.5']
   });
-  const words = text.split(/\s+/).filter(Boolean);
+  const split = lines.map((l) => l.split(/\s+/).filter(Boolean));
+  const total = split.reduce((n, w) => n + w.length, 0);
+  let offset = 0;
 
-  if (reduce) {
-    return <p className={className}>{text}</p>;
-  }
   return (
-    <p ref={ref} className={cn(className)} aria-label={text}>
-      {words.map((w, i) => (
-        <Word
-          key={`${w}-${i}`}
-          word={w}
-          index={i}
-          total={words.length}
-          progress={scrollYProgress}
-        />
-      ))}
+    <p ref={ref} className={cn(className)} aria-label={lines.join(' ')}>
+      {split.map((words, li) => {
+        const start = offset;
+        offset += words.length;
+        return (
+          <span key={li} className="block" aria-hidden="true">
+            {words.map((w, i) =>
+              reduce ? (
+                <span
+                  key={i}
+                  style={{ color: TO, textShadow: '0 1px 1px rgba(0,0,0,0.22)' }}
+                >
+                  {w}{' '}
+                </span>
+              ) : (
+                <Word
+                  key={`${w}-${i}`}
+                  word={w}
+                  index={start + i}
+                  total={total}
+                  progress={scrollYProgress}
+                />
+              )
+            )}
+          </span>
+        );
+      })}
     </p>
   );
 }
