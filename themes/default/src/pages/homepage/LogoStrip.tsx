@@ -9,7 +9,7 @@ export default function LogoStrip() {
     <section aria-labelledby="logos-title" className={sectionY}>
       <h2
         id="logos-title"
-        className="mb-5 text-center text-sm font-medium text-muted-foreground"
+        className="mb-8 text-center text-2xl font-extrabold tracking-tight sm:text-3xl md:text-4xl"
       >
         {LOGOS_HEADING}
       </h2>

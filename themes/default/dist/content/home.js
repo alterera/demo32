@@ -40,9 +40,8 @@ export const BEST_SELLERS = {
     buttonHref: '/search?keyword='
 };
 export const OFFER_BANNERS = [
-    { id: 'o1', image: '/images/offers/offer-1.svg', href: '/search?keyword=', alt: 'Flat 10% off on your first order' },
-    { id: 'o2', image: '/images/offers/offer-2.svg', href: '/search?keyword=', alt: 'Free delivery on orders above ₹500' },
-    { id: 'o3', image: '/images/offers/offer-3.svg', href: '/search?keyword=', alt: 'New arrivals are here' }
+    { id: 'o1', image: '/images/offers/o1.webp', href: '/search?keyword=', alt: 'Flat 10% off on your first order' },
+    { id: 'o2', image: '/images/offers/o2.webp', href: '/search?keyword=', alt: 'Free delivery on orders above ₹500' },
 ];
 /**
  * Two full-bleed columns, each with a background image and overlaid text.
@@ -100,12 +99,12 @@ export const SERVICE_ITEMS = [
  * and set `image`; without one the name is shown as a text wordmark.
  */
 export const LOGOS = [
-    { name: 'Brand One' },
-    { name: 'Brand Two' },
-    { name: 'Brand Three' },
-    { name: 'Brand Four' },
-    { name: 'Brand Five' },
-    { name: 'Brand Six' }
+    { name: 'Allegro', image: '/images/brands/allegro.svg' },
+    { name: 'Bata', image: '/images/brands/bata.svg' },
+    { name: 'ESPN', image: '/images/brands/espn.svg' },
+    { name: 'Minnesota Wild', image: '/images/brands/minnesota-wild.svg' },
+    { name: 'Pfizer', image: '/images/brands/pfizer.svg' },
+    { name: 'Skechers', image: '/images/brands/skechers.svg' }
 ];
 export const LOGOS_HEADING = 'Brands we work with';
 //# sourceMappingURL=home.js.map

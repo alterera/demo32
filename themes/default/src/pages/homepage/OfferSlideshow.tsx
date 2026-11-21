@@ -32,7 +32,7 @@ export default function OfferSlideshow() {
                   alt={b.alt}
                   loading="lazy"
                   draggable={false}
-                  className="aspect-[16/6] w-full object-cover sm:aspect-[16/4] lg:aspect-[16/3]"
+                  className="aspect-[2000/814] w-full object-cover"
                 />
               </a>
             </CarouselItem>

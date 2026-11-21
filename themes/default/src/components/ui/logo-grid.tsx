@@ -28,14 +28,14 @@ export function LogoGrid({
       {logos.map((logo) => (
         <li
           key={logo.name}
-          className="flex h-12 items-center justify-center px-4"
+          className="flex h-16 items-center justify-center px-4"
         >
           {logo.image ? (
             <img
               src={logo.image}
               alt={logo.name}
               loading="lazy"
-              className="max-h-8 w-auto max-w-full object-contain opacity-60 grayscale transition hover:opacity-100 hover:grayscale-0 md:max-h-10"
+              className="max-h-10 w-auto max-w-full object-contain opacity-70 grayscale transition hover:opacity-100 hover:grayscale-0 md:max-h-12"
             />
           ) : (
             <span className="text-center text-sm font-bold tracking-wide text-muted-foreground md:text-base">

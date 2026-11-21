@@ -22,7 +22,8 @@ export default function BestSellers({ bestSellers }: Props) {
         <span id="best-sellers-copy" className="sr-only">Best sellers</span>
         <div className="mt-5">
           <Button
-            className="rounded-none px-6"
+            variant="outline"
+            className="w-full rounded-none border-2 border-foreground bg-transparent px-8 hover:bg-foreground hover:text-background sm:w-auto"
             nativeButton={false}
             render={<a href={BEST_SELLERS.buttonHref} />}
           >

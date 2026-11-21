@@ -64,7 +64,7 @@ export default function Hero({ heroCategories }: Props) {
         <CarouselContent>
           {HERO_SLIDES.map((slide, i) => (
             <CarouselItem key={slide.id}>
-              <div className="relative aspect-[4/5] w-full overflow-hidden bg-muted sm:aspect-[16/10] lg:aspect-[16/7]">
+              <div className="relative h-[70svh] w-full overflow-hidden bg-muted lg:h-[calc(100svh-92px)]">
                 <picture>
                   <source media="(max-width: 639px)" srcSet={slide.mobileImage} />
                   <img

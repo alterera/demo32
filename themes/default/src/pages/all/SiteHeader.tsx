@@ -71,19 +71,16 @@ export default function SiteHeader({
           <div className="flex flex-1 items-center gap-1 lg:flex-none">
             <MobileMenu items={items} storeName={storeName} />
             <a href="/" aria-label={`${storeName} home`} className="flex items-center">
-              {headerSetting?.logo ? (
+              <picture>
+                <source media="(max-width: 639px)" srcSet="/images/logo-phone.svg" />
                 <img
-                  src={`/images?src=${encodeURIComponent(headerSetting.logo)}&w=320&q=85&f=webp`}
-                  alt=""
-                  width={headerSetting.logoWidth}
-                  height={headerSetting.logoHeight}
-                  className="max-h-9 w-auto"
+                  src="/images/logo.svg"
+                  alt={storeName}
+                  width={302}
+                  height={40}
+                  className="h-7 w-auto sm:h-8"
                 />
-              ) : (
-                <span className="whitespace-nowrap text-base font-extrabold uppercase tracking-widest sm:text-lg">
-                  {storeName}
-                </span>
-              )}
+              </picture>
             </a>
           </div>
 

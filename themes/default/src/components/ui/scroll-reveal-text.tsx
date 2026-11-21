@@ -9,7 +9,7 @@ import {
 import { cn } from '@evershop/evershop/lib/util/cn';
 
 const FROM = '#c8c8c4'; // unlit
-const TO = '#39ff14'; // brand neon
+const TO = '#000000';
 
 function Word({
   word,
@@ -25,7 +25,7 @@ function Word({
   const color = useTransform(progress, [index / total, (index + 1) / total], [FROM, TO]);
   return (
     <motion.span
-      style={{ color, textShadow: '0 1px 1px rgba(0,0,0,0.22)' }}
+      style={{ color, textShadow: 'none' }}
       className="inline-block"
     >
       {word}&nbsp;
@@ -34,7 +34,7 @@ function Word({
 }
 
 /**
- * Text whose words turn the brand neon, one by one, as it scrolls through the
+ * Text whose words turn black, one by one, as it scrolls through the
  * viewport. Each entry in `lines` is its own line. With reduced motion the full
  * text is shown lit straight away.
  */
@@ -66,7 +66,7 @@ export function ScrollRevealText({
               reduce ? (
                 <span
                   key={i}
-                  style={{ color: TO, textShadow: '0 1px 1px rgba(0,0,0,0.22)' }}
+                  style={{ color: TO }}
                 >
                   {w}{' '}
                 </span>

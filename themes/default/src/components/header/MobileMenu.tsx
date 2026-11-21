@@ -31,13 +31,15 @@ export function MobileMenu({
         <Menu className="h-5 w-5" />
       </SheetTrigger>
       <SheetContent side="left" className="w-[85vw] max-w-sm rounded-none p-0">
-        <SheetHeader className="border-b p-4">
-          <SheetTitle className="uppercase tracking-widest">{storeName}</SheetTitle>
+        <SheetHeader className="border-b-2 border-[#39ff14] p-5">
+          <SheetTitle>
+            <img src="/images/logo.svg" alt={storeName} className="h-6 w-auto" />
+          </SheetTitle>
         </SheetHeader>
-        <Accordion className="px-4">
+        <Accordion className="px-5 pt-2">
           {items.map((cat) => (
             <AccordionItem key={cat.url} value={cat.url}>
-              <AccordionTrigger className="rounded-none text-sm font-semibold uppercase tracking-wider">
+              <AccordionTrigger className="rounded-none py-5 text-lg font-extrabold uppercase tracking-[0.12em]">
                 {cat.name}
               </AccordionTrigger>
               <AccordionContent>
@@ -45,14 +47,14 @@ export function MobileMenu({
                   <li>
                     <a
                       href={cat.url}
-                      className="block py-2 text-sm font-medium underline"
+                      className="block py-2 text-sm font-semibold underline decoration-[#39ff14] decoration-2 underline-offset-4"
                     >
                       Shop all {cat.name}
                     </a>
                   </li>
                   {(cat.children ?? []).map((s) => (
                     <li key={s.url}>
-                      <a href={s.url} className="block py-2 text-sm">
+                      <a href={s.url} className="block py-2 text-sm font-medium tracking-wide">
                         {s.name}
                       </a>
                       {(s.children ?? []).map((g) => (

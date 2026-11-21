@@ -6,7 +6,6 @@ export const COLLECTIONS = {
   bestSellers: 'best-sellers',
   newArrivals: 'new-arrivals',
   trending: 'trending',
-  promo: 'promo-picks',
   showcase: 'showcase'
 } as const;
 
@@ -39,15 +38,17 @@ export const HERO_BUTTONS = ['Sneakers', 'Heels'];
 
 export const BEST_SELLERS = {
   // each entry is shown on its own line
-  lines: ['Simple by design.', 'Made to be yours.'],
+  lines: [
+    'Simple by design. Made to be yours.',
+    'Every pair is crafted with care, built for comfort and made to move with you.'
+  ],
   buttonLabel: 'Explore More',
   buttonHref: '/search?keyword='
 };
 
 export const OFFER_BANNERS = [
-  { id: 'o1', image: '/images/offers/offer-1.svg', href: '/search?keyword=', alt: 'Flat 10% off on your first order' },
-  { id: 'o2', image: '/images/offers/offer-2.svg', href: '/search?keyword=', alt: 'Free delivery on orders above ₹500' },
-  { id: 'o3', image: '/images/offers/offer-3.svg', href: '/search?keyword=', alt: 'New arrivals are here' }
+  { id: 'o1', image: '/images/offers/o1.webp', href: '/search?keyword=', alt: 'Flat 10% off on your first order' },
+  { id: 'o2', image: '/images/offers/o2.webp', href: '/search?keyword=', alt: 'Free delivery on orders above ₹500' }
 ];
 
 /**
@@ -109,11 +110,11 @@ export const SERVICE_ITEMS = [
  * and set `image`; without one the name is shown as a text wordmark.
  */
 export const LOGOS: { name: string; image?: string }[] = [
-  { name: 'Brand One' },
-  { name: 'Brand Two' },
-  { name: 'Brand Three' },
-  { name: 'Brand Four' },
-  { name: 'Brand Five' },
-  { name: 'Brand Six' }
+  { name: 'Allegro', image: '/images/brands/allegro.svg' },
+  { name: 'Bata', image: '/images/brands/bata.svg' },
+  { name: 'ESPN', image: '/images/brands/espn.svg' },
+  { name: 'Minnesota Wild', image: '/images/brands/minnesota-wild.svg' },
+  { name: 'Pfizer', image: '/images/brands/pfizer.svg' },
+  { name: 'Skechers', image: '/images/brands/skechers.svg' }
 ];
 export const LOGOS_HEADING = 'Brands we work with';

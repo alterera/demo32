@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { Button } from '@evershop/evershop/components/common/ui/Button';
 import {
   Carousel,
   CarouselContent,
@@ -13,17 +12,17 @@ import { ProductCard, type Product } from './ProductCard.js';
 function Arrows() {
   const { scrollPrev, scrollNext } = useCarousel();
   const base =
-    'absolute top-1/2 z-20 hidden size-11 -translate-y-1/2 rounded-full shadow-md lg:inline-flex';
+    'pointer-events-auto absolute top-1/2 z-30 inline-flex size-9 -translate-y-1/2 items-center justify-center rounded-full border border-black/10 bg-white/95 text-black shadow-[0_4px_16px_rgba(0,0,0,0.18)] backdrop-blur transition hover:scale-105 hover:bg-black hover:text-white active:scale-95 sm:size-11';
   return (
     <>
-      <Button type="button" variant="secondary" size="icon" aria-label="Previous products"
-        onClick={scrollPrev} className={`${base} left-4`}>
+      <button type="button" aria-label="Previous products" onClick={scrollPrev}
+        className={`${base} left-2 sm:left-4`}>
         <ChevronLeft className="size-5" />
-      </Button>
-      <Button type="button" variant="secondary" size="icon" aria-label="Next products"
-        onClick={scrollNext} className={`${base} right-4`}>
+      </button>
+      <button type="button" aria-label="Next products" onClick={scrollNext}
+        className={`${base} right-2 sm:right-4`}>
         <ChevronRight className="size-5" />
-      </Button>
+      </button>
     </>
   );
 }

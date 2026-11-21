@@ -6,4 +6,22 @@
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>http://localhost:3000/men/sneakers/gambo</loc>
+    <lastmod>2026-11-20T19:20:55.405Z</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>http://localhost:3000/men/sneakers/reego</loc>
+    <lastmod>2026-11-20T19:24:37.137Z</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>http://localhost:3000/men/sneakers/synk</loc>
+    <lastmod>2026-11-20T19:27:24.288Z</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
